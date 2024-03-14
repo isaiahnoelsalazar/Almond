@@ -62,6 +62,10 @@ simpleList.addItem("Sample text");
 - Remove data from SimpleList
 ```
 simpleList.removeItem(0); // index of item
+
+simpleList.removeStartItem(); //removes item at the start of the list
+
+simpleList.removeEndItem(); // removes item at the end of the list
 ```
 - Get List<String> data from SimpleList
 ```
