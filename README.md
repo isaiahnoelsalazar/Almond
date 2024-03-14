@@ -11,7 +11,7 @@ repositories {
 implementation 'com.github.saiaaaaaaa:Almond:(version)'
 ```
 # Available customs
-### a. SimpleList
+## 1. SimpleList
 - Create RecyclerView in activity layout
 ```
 <androidx.recyclerview.widget.RecyclerView
@@ -77,3 +77,63 @@ simpleList.setItemPadding(16); // will set 16dp padding to left, top, right, bot
 // or
 simpleList.setItemPadding(16, 22, 24, 8); // will set multiple padding values to left, top, right, bottom
 ```
+## 2. RoundedAlertDialog
+- Initialize RoundedAlertDialog using context
+```
+RoundedAlertDialog rad = new RoundedAlertDialog(this); // rounded alert dialog
+rad.create("Title"); // required
+
+rad.show(); // shows rounded alert dialog
+```
+#### Methods
+- Working with left and/or right button/s
+```
+rad.setupRightButton("Sample text"); // show right button
+
+rad.setupRightButtonOnClick(new View.OnClickListener() { // add right button click listener
+    @Override
+    public void onClick(View v) {
+        /* code */
+    }
+});
+
+rad.setupLeftButton("Sample text"); // show left button
+
+rad.setupLeftButtonOnClick(new View.OnClickListener() { // add left button click listener
+    @Override
+    public void onClick(View v) {
+        /* code */
+    }
+});
+```
+#### *Adding a view to RoundedAlertDialog*
+- Create a custom XML layout file
+```
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <DatePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:spinnersShown="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+> Sample code above is only an example for a custom XML layout. Feel free to create any layout you want.
+- Initialize custom XML layout file and add to RoundedAlertDialog
+```
+LayoutInflater li = LayoutInflater.from(this);
+View v = li.inflate(R.layout.custom_layout, null);
+
+/* other existing code */
+
+rad.addView(v);
+```
+> Don't forget to call 'rad.show()' method
