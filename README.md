@@ -34,26 +34,26 @@ SimpleList simpleList = new SimpleList(context, rv, data); // simple list
 #### *Other initialization methods*
 - SimpleList with item click
 ```
-public class MyClass extends AppCompatAcitivty implements SimpleListAdapter.OnItemClickListener {
+public class MyClass extends AppCompatAcitivty implements SimpleListOnItemClick {
     /* other existing code */
     SimpleList simpleList = new SimpleList(context, rv, data, this);
 }
 ```
 - SimpleList with item long click
 ```
-public class MyClass extends AppCompatAcitivty implements SimpleListAdapter.OnItemLongClickListener {
+public class MyClass extends AppCompatAcitivty implements SimpleListOnItemLongClick {
     /* other existing code */
     SimpleList simpleList = new SimpleList(context, rv, data, this);
 }
 ```
 - SimpleList with item click and item long click
 ```
-public class MyClass extends AppCompatAcitivty implements SimpleListAdapter.OnItemClickListener, SimpleListAdapter.OnItemLongClickListener {
+public class MyClass extends AppCompatAcitivty implements SimpleListOnItemClick, SimpleListOnItemLongClick {
     /* other existing code */
     SimpleList simpleList = new SimpleList(context, rv, data, this, this);
 }
 ```
-> Keyword 'this' refers to implementation SimpleListAdapter.OnItemClickListener and/or SimpleListAdapter.OnItemLongClickListener
+> Keyword 'this' refers to implementation SimpleListOnItemClick and/or SimpleListOnItemLongClick
 #### Methods
 - Add data to SimpleList
 ```
