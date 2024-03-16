@@ -14,33 +14,33 @@ import java.util.Objects;
 
 public class RoundedAlertDialog {
     Context context;
-    LayoutInflater li;
-    View v;
-    AlertDialog.Builder adb;
-    AlertDialog ad;
+    LayoutInflater layoutInflater;
+    View dialogView;
+    AlertDialog.Builder builder;
+    AlertDialog alertDialog;
     Button leftButton, rightButton;
-    ScrollView sv;
+    ScrollView scrollView;
 
     public RoundedAlertDialog(Context context){
         this.context = context;
     }
 
     public void create(String title){
-        li = LayoutInflater.from(context);
-        v = li.inflate(R.layout.rounded_alert_dialog_layout, null);
-        final TextView texttitle = v.findViewById(R.id.rounded_alert_dialog_title);
-        sv = v.findViewById(R.id.rounded_alert_dialog_view);
-        adb = new AlertDialog.Builder(context)
-                .setView(v);
+        layoutInflater = LayoutInflater.from(context);
+        dialogView = layoutInflater.inflate(R.layout.rounded_alert_dialog_layout, null);
+        final TextView texttitle = dialogView.findViewById(R.id.rounded_alert_dialog_title);
+        scrollView = dialogView.findViewById(R.id.rounded_alert_dialog_view);
+        builder = new AlertDialog.Builder(context)
+                .setView(dialogView);
         texttitle.setText(title);
     }
 
     public void addView(View view){
-        sv.addView(view);
+        scrollView.addView(view);
     }
 
     public void setupLeftButton(String text){
-        leftButton = v.findViewById(R.id.rounded_alert_dialog_left_button);
+        leftButton = dialogView.findViewById(R.id.rounded_alert_dialog_left_button);
         leftButton.setText(text);
         leftButton.setVisibility(View.VISIBLE);
     }
@@ -54,18 +54,18 @@ public class RoundedAlertDialog {
     }
 
     public void setupRightButton(String text){
-        rightButton = v.findViewById(R.id.rounded_alert_dialog_right_button);
+        rightButton = dialogView.findViewById(R.id.rounded_alert_dialog_right_button);
         rightButton.setText(text);
         rightButton.setVisibility(View.VISIBLE);
     }
 
     public void show(){
-        ad = adb.create();
-        Objects.requireNonNull(ad.getWindow()).getDecorView().setBackgroundColor(Color.TRANSPARENT);
-        ad.show();
+        alertDialog = builder.create();
+        Objects.requireNonNull(alertDialog.getWindow()).getDecorView().setBackgroundColor(Color.TRANSPARENT);
+        alertDialog.show();
     }
 
     public void hide(){
-        ad.cancel();
+        alertDialog.cancel();
     }
 }

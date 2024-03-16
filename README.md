@@ -80,7 +80,7 @@ simpleList.setItemPadding(16, 22, 24, 8); // will set multiple padding values to
 ## 2. RoundedAlertDialog
 - Initialize RoundedAlertDialog using context
 ```
-RoundedAlertDialog rad = new RoundedAlertDialog(this); // rounded alert dialog
+RoundedAlertDialog rad = new RoundedAlertDialog(context); // rounded alert dialog
 rad.create("Title"); // required
 
 rad.show(); // shows rounded alert dialog
@@ -137,3 +137,50 @@ View v = li.inflate(R.layout.custom_layout, null);
 rad.addView(v);
 ```
 > Don't forget to call 'rad.show()' method
+## 3. StringChecker
+#### Methods
+- Check a string if it has any symbols
+```
+StringChecker.hasSymbols("Sample text"); // returns false
+
+StringChecker.hasSymbols("Sample text!"); // returns true
+```
+- Check a string if it has any numbers
+```
+StringChecker.hasNumbers("Sample text"); // returns false
+
+StringChecker.hasNumbers("Sample text 1"); // returns true
+```
+## 4. EasySQL
+- Initialize EasySQL using context
+```
+EasySQL es = new EasySQL(context);
+```
+#### Methods
+- Create a table
+```
+Map<String, String> columns = new HashMap<>();
+testvalues1.put("fname", "text");
+testvalues1.put("lname", "text");
+
+es.createTable("db1", "table1", columns);
+```
+> EasySQL will automatically create/open a database while calling the 'createTable' method
+- Check if a table exists
+```
+if (!es.doesTableExist("db1", "table1")){
+    /* other existing code */
+}
+```
+- Insert a value to a table
+```
+Map<String, String> values = new HashMap<>();
+testvalues1.put("fname", "Nutty");
+testvalues1.put("lname", "Almond");
+
+es.createTable("db1", "table1", values);
+```
+- Get all values from a table
+```
+List<Map<String, String>> tableValues = es.getTableValues("db1", "table1");
+```
