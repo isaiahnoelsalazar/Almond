@@ -10,6 +10,8 @@ repositories {
 ```
 implementation 'com.github.saiaaaaaaa:Almond:(version)'
 ```
+## Sample applications using Almond
+- https://github.com/saiaaaaaaa/Note
 # Available customs
 ## 1. SimpleList
 - Create RecyclerView in activity layout
