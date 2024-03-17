@@ -65,6 +65,22 @@ public class EasySQL {
         db.insert(tableName, null, cv);
     }
 
+    public void deleteFromTable(String databaseName, String tableName, String where){
+        SQLiteDatabase db = openDatabase(databaseName);
+        String query = "DELETE FROM " + tableName + " WHERE " + where;
+        db.execSQL(query);
+    }
+
+    public void deleteTable(String databaseName, String tableName){
+        SQLiteDatabase db = openDatabase(databaseName);
+        String query = "DROP TABLE " + tableName;
+        db.execSQL(query);
+    }
+
+    public String whereClauseCreator(String column, String value){
+        return column + "='" + value + "'";
+    }
+
     public List<Map<String, String>> getTableValues(String databaseName, String tableName){
         List<Map<String, String>> values = new ArrayList<>();
         SQLiteDatabase db = openDatabase(databaseName);

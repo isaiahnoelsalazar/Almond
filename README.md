@@ -184,3 +184,12 @@ es.createTable("db1", "table1", values);
 ```
 List<Map<String, String>> tableValues = es.getTableValues("db1", "table1");
 ```
+- Delete a table
+```
+es.deleteTable("db1", "table1");
+```
+- Delete a value from a table
+```
+String whereClause = es.whereClauseCreator("fname", "Nutty");
+es.deleteFromTable("db1", "table1", whereClause);
+```
