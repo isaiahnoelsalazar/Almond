@@ -195,3 +195,9 @@ es.deleteTable("db1", "table1");
 String whereClause = es.whereClauseCreator("fname", "Nutty");
 es.deleteFromTable("db1", "table1", whereClause);
 ```
+## 5. Fullscreen
+- Make any activty fullscreen
+```
+Fullscreen.enableFullscreen(this);
+```
+> Keyword 'this' refers to any valid activity

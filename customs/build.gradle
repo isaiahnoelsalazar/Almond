@@ -43,7 +43,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'com.github.saiaaaaaaa'
             artifactId = 'Almond'
-            version = "1.0.5"
+            version = "1.0.6"
             pom {
                 description = 'Almond'
             }

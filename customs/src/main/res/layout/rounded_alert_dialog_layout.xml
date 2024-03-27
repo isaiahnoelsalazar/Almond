@@ -37,7 +37,7 @@
         android:paddingStart="16dp"
         android:paddingTop="12dp">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/rounded_alert_dialog_left_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,17 +46,23 @@
             android:text="@string/sample_text"
             android:padding="14dp"
             android:visibility="gone"
+            android:background="@drawable/rounded_alert_dialog_button_bg"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/rounded_alert_dialog_right_button"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/rounded_alert_dialog_right_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sample_text"
             android:padding="14dp"
             android:visibility="gone"
+            android:background="@drawable/rounded_alert_dialog_button_bg"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
