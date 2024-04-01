@@ -30,12 +30,14 @@ public class RoundedAlertDialog {
         dialogView = layoutInflater.inflate(R.layout.rounded_alert_dialog_layout, null);
         final TextView texttitle = dialogView.findViewById(R.id.rounded_alert_dialog_title);
         scrollView = dialogView.findViewById(R.id.rounded_alert_dialog_view);
+        scrollView.setVisibility(View.GONE);
         builder = new AlertDialog.Builder(context)
                 .setView(dialogView);
         texttitle.setText(title);
     }
 
     public void addView(View view){
+        scrollView.setVisibility(View.VISIBLE);
         scrollView.addView(view);
     }
 

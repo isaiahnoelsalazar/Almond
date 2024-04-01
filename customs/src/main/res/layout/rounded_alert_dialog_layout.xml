@@ -14,6 +14,7 @@
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
         android:text="@string/sample_text"
+        android:layout_marginTop="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextSizeCheck" />
@@ -21,16 +22,14 @@
     <ScrollView
         android:id="@+id/rounded_alert_dialog_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:overScrollMode="never"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintTop_toBottomOf="@+id/rounded_alert_dialog_title"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintHeight_percent="0.75"
+        app:layout_constraintTop_toBottomOf="@+id/rounded_alert_dialog_title">
 
     </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="16dp"
@@ -39,7 +38,7 @@
         android:paddingEnd="16dp"
         android:paddingRight="16dp"
         android:paddingBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/rounded_alert_dialog_view">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/rounded_alert_dialog_left_button"
