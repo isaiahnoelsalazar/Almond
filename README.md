@@ -196,8 +196,13 @@ String whereClause = es.whereClauseCreator("fname", "Nutty");
 es.deleteFromTable("db1", "table1", whereClause);
 ```
 ## 5. Fullscreen
-- Make any activty fullscreen
+- Enable fullscreen on any activity
 ```
 Fullscreen.enableFullscreen(this);
+```
+> Keyword 'this' refers to any valid activity
+- Disable fullscreen on any activity
+```
+Fullscreen.disableFullscreen(this);
 ```
 > Keyword 'this' refers to any valid activity
