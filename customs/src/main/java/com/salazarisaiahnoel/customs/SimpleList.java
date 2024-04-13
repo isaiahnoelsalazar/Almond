@@ -342,34 +342,49 @@ class SimpleListAdapter extends RecyclerView.Adapter<SimpleListAdapter.SimpleLis
     @NonNull
     @Override
     public SimpleListHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.simple_list_item, parent, false);
-        SimpleListHolder simpleListHolder = new SimpleListHolder(view);
-        switch (clickListener){
-            case 1:
-                simpleListHolder = new SimpleListHolder(view, onItemClickListener);
-                break;
-            case 2:
-                simpleListHolder = new SimpleListHolder(view, onItemLongClickListener);
-                break;
-            case 3:
-                simpleListHolder = new SimpleListHolder(view, onItemClickListener, onItemLongClickListener);
-                break;
-        }
-        float scale = parent.getContext().getResources().getDisplayMetrics().density;
-        if (singlePadding){
-            if (!hasSubdata){
+        if (!hasSubdata){
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.simple_list_item, parent, false);
+            SimpleListHolder simpleListHolder = new SimpleListHolder(view);
+            switch (clickListener){
+                case 1:
+                    simpleListHolder = new SimpleListHolder(view, onItemClickListener);
+                    break;
+                case 2:
+                    simpleListHolder = new SimpleListHolder(view, onItemLongClickListener);
+                    break;
+                case 3:
+                    simpleListHolder = new SimpleListHolder(view, onItemClickListener, onItemLongClickListener);
+                    break;
+            }
+            float scale = parent.getContext().getResources().getDisplayMetrics().density;
+            if (singlePadding){
                 simpleListHolder.button.setPadding((int) (itemPaddingAllSides * scale + 0.5f), (int) (itemPaddingAllSides * scale + 0.5f), (int) (itemPaddingAllSides * scale + 0.5f), (int) (itemPaddingAllSides * scale + 0.5f));
             } else {
-                simpleListHolder.constraintLayout.setPadding((int) (itemPaddingAllSides * scale + 0.5f), (int) (itemPaddingAllSides * scale + 0.5f), (int) (itemPaddingAllSides * scale + 0.5f), (int) (itemPaddingAllSides * scale + 0.5f));
-            }
-        } else {
-            if (!hasSubdata){
                 simpleListHolder.button.setPadding((int) (itemPaddingLeft * scale + 0.5f), (int) (itemPaddingTop * scale + 0.5f), (int) (itemPaddingRight * scale + 0.5f), (int) (itemPaddingBottom * scale + 0.5f));
+            }
+            return simpleListHolder;
+        } else {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.simple_list_item_subtext, parent, false);
+            SimpleListHolder simpleListHolder = new SimpleListHolder(view);
+            switch (clickListener){
+                case 1:
+                    simpleListHolder = new SimpleListHolder(view, onItemClickListener);
+                    break;
+                case 2:
+                    simpleListHolder = new SimpleListHolder(view, onItemLongClickListener);
+                    break;
+                case 3:
+                    simpleListHolder = new SimpleListHolder(view, onItemClickListener, onItemLongClickListener);
+                    break;
+            }
+            float scale = parent.getContext().getResources().getDisplayMetrics().density;
+            if (singlePadding){
+                simpleListHolder.constraintLayout.setPadding((int) (itemPaddingAllSides * scale + 0.5f), (int) (itemPaddingAllSides * scale + 0.5f), (int) (itemPaddingAllSides * scale + 0.5f), (int) (itemPaddingAllSides * scale + 0.5f));
             } else {
                 simpleListHolder.constraintLayout.setPadding((int) (itemPaddingLeft * scale + 0.5f), (int) (itemPaddingTop * scale + 0.5f), (int) (itemPaddingRight * scale + 0.5f), (int) (itemPaddingBottom * scale + 0.5f));
             }
+            return simpleListHolder;
         }
-        return simpleListHolder;
     }
 
     @Override
