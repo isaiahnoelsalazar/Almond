@@ -1,12 +1,15 @@
 package com.salazarisaiahnoel.customs;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,7 +21,7 @@ import java.util.List;
 public class SimpleList {
 
     Context context;
-    List<String> data;
+    List<String> data, subdata;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
     SimpleListAdapter simpleListAdapter;
@@ -61,6 +64,54 @@ public class SimpleList {
     public SimpleList(Context context, RecyclerView recyclerView, List<String> data, SimpleListOnItemClick onItemClickListener, SimpleListOnItemLongClick onItemLongClickListener){
         this.context = context;
         this.data = data;
+        this.recyclerView = recyclerView;
+        linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        clickListener = 3;
+        this.onItemClickListener = onItemClickListener;
+        this.onItemLongClickListener = onItemLongClickListener;
+        refresh();
+    }
+
+    public SimpleList(Context context, RecyclerView recyclerView, List<String> data, List<String> subdata){
+        this.context = context;
+        this.data = data;
+        this.subdata = subdata;
+        this.recyclerView = recyclerView;
+        linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        clickListener = 0;
+        refresh();
+    }
+
+    public SimpleList(Context context, RecyclerView recyclerView, List<String> data, List<String> subdata, SimpleListOnItemClick onItemClickListener){
+        this.context = context;
+        this.data = data;
+        this.subdata = subdata;
+        this.recyclerView = recyclerView;
+        linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        clickListener = 1;
+        this.onItemClickListener = onItemClickListener;
+        refresh();
+    }
+
+    public SimpleList(Context context, RecyclerView recyclerView, List<String> data, List<String> subdata, SimpleListOnItemLongClick onItemLongClickListener){
+        this.context = context;
+        this.data = data;
+        this.subdata = subdata;
+        this.recyclerView = recyclerView;
+        linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        clickListener = 2;
+        this.onItemLongClickListener = onItemLongClickListener;
+        refresh();
+    }
+
+    public SimpleList(Context context, RecyclerView recyclerView, List<String> data, List<String> subdata, SimpleListOnItemClick onItemClickListener, SimpleListOnItemLongClick onItemLongClickListener){
+        this.context = context;
+        this.data = data;
+        this.subdata = subdata;
         this.recyclerView = recyclerView;
         linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -190,9 +241,10 @@ public class SimpleList {
 }
 
 class SimpleListAdapter extends RecyclerView.Adapter<SimpleListAdapter.SimpleListHolder>{
-    List<String> data;
+    List<String> data, subdata;
     int itemPaddingAllSides = 0, itemPaddingLeft = 0, itemPaddingTop = 0, itemPaddingRight = 0, itemPaddingBottom = 0;
     boolean singlePadding = false;
+    boolean hasSubdata = false;
 
     int clickListener = 0;
 
@@ -202,6 +254,13 @@ class SimpleListAdapter extends RecyclerView.Adapter<SimpleListAdapter.SimpleLis
     public SimpleListAdapter(int clickListener, List<String> data){
         this.data = data;
         this.clickListener = clickListener;
+    }
+
+    public SimpleListAdapter(int clickListener, List<String> data, List<String> subdata){
+        this.data = data;
+        this.subdata = subdata;
+        this.clickListener = clickListener;
+        hasSubdata = true;
     }
 
     public int getItemPaddingAllSides(){
@@ -242,6 +301,31 @@ class SimpleListAdapter extends RecyclerView.Adapter<SimpleListAdapter.SimpleLis
         this.clickListener = clickListener;
     }
 
+    public SimpleListAdapter(int clickListener, List<String> data, List<String> subdata, SimpleListOnItemClick onItemClickListener){
+        this.data = data;
+        this.subdata = subdata;
+        this.onItemClickListener = onItemClickListener;
+        this.clickListener = clickListener;
+        hasSubdata = true;
+    }
+
+    public SimpleListAdapter(int clickListener, List<String> data, List<String> subdata, SimpleListOnItemLongClick onItemLongClickListener){
+        this.data = data;
+        this.subdata = subdata;
+        this.onItemLongClickListener = onItemLongClickListener;
+        this.clickListener = clickListener;
+        hasSubdata = true;
+    }
+
+    public SimpleListAdapter(int clickListener, List<String> data, List<String> subdata, SimpleListOnItemClick onItemClickListener, SimpleListOnItemLongClick onItemLongClickListener){
+        this.data = data;
+        this.subdata = subdata;
+        this.onItemClickListener = onItemClickListener;
+        this.onItemLongClickListener = onItemLongClickListener;
+        this.clickListener = clickListener;
+        hasSubdata = true;
+    }
+
     public void setItemPaddingAllSides(int allSides){
         singlePadding = true;
         itemPaddingAllSides = allSides;
@@ -273,16 +357,28 @@ class SimpleListAdapter extends RecyclerView.Adapter<SimpleListAdapter.SimpleLis
         }
         float scale = parent.getContext().getResources().getDisplayMetrics().density;
         if (singlePadding){
-            simpleListHolder.button.setPadding((int) (itemPaddingAllSides * scale + 0.5f), (int) (itemPaddingAllSides * scale + 0.5f), (int) (itemPaddingAllSides * scale + 0.5f), (int) (itemPaddingAllSides * scale + 0.5f));
+            if (!hasSubdata){
+                simpleListHolder.button.setPadding((int) (itemPaddingAllSides * scale + 0.5f), (int) (itemPaddingAllSides * scale + 0.5f), (int) (itemPaddingAllSides * scale + 0.5f), (int) (itemPaddingAllSides * scale + 0.5f));
+            } else {
+                simpleListHolder.constraintLayout.setPadding((int) (itemPaddingAllSides * scale + 0.5f), (int) (itemPaddingAllSides * scale + 0.5f), (int) (itemPaddingAllSides * scale + 0.5f), (int) (itemPaddingAllSides * scale + 0.5f));
+            }
         } else {
-            simpleListHolder.button.setPadding((int) (itemPaddingLeft * scale + 0.5f), (int) (itemPaddingTop * scale + 0.5f), (int) (itemPaddingRight * scale + 0.5f), (int) (itemPaddingBottom * scale + 0.5f));
+            if (!hasSubdata){
+                simpleListHolder.button.setPadding((int) (itemPaddingLeft * scale + 0.5f), (int) (itemPaddingTop * scale + 0.5f), (int) (itemPaddingRight * scale + 0.5f), (int) (itemPaddingBottom * scale + 0.5f));
+            } else {
+                simpleListHolder.constraintLayout.setPadding((int) (itemPaddingLeft * scale + 0.5f), (int) (itemPaddingTop * scale + 0.5f), (int) (itemPaddingRight * scale + 0.5f), (int) (itemPaddingBottom * scale + 0.5f));
+            }
         }
         return simpleListHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull SimpleListHolder holder, int position) {
-        holder.button.setText(data.get(position));
+        if (!hasSubdata){
+            holder.button.setText(data.get(position));
+        } else {
+            holder.t1.setText(data.get(position));
+        }
     }
 
     @Override
@@ -293,6 +389,8 @@ class SimpleListAdapter extends RecyclerView.Adapter<SimpleListAdapter.SimpleLis
     class SimpleListHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
         Button button;
+        ConstraintLayout constraintLayout;
+        TextView t1, t2;
         SimpleListOnItemClick onItemClickListener;
         SimpleListOnItemLongClick onItemLongClickListener;
 
@@ -300,6 +398,9 @@ class SimpleListAdapter extends RecyclerView.Adapter<SimpleListAdapter.SimpleLis
             super(itemView);
 
             button = itemView.findViewById(R.id.simple_list_item_id);
+            constraintLayout = itemView.findViewById(R.id.simple_list_item_id_subtext);
+            t1 = itemView.findViewById(R.id.textView);
+            t2 = itemView.findViewById(R.id.textView2);
 
             itemView.setOnClickListener(null);
             itemView.setOnLongClickListener(null);
@@ -309,6 +410,9 @@ class SimpleListAdapter extends RecyclerView.Adapter<SimpleListAdapter.SimpleLis
             super(itemView);
 
             button = itemView.findViewById(R.id.simple_list_item_id);
+            constraintLayout = itemView.findViewById(R.id.simple_list_item_id_subtext);
+            t1 = itemView.findViewById(R.id.textView);
+            t2 = itemView.findViewById(R.id.textView2);
 
             this.onItemClickListener = onItemClickListener;
 
@@ -319,6 +423,9 @@ class SimpleListAdapter extends RecyclerView.Adapter<SimpleListAdapter.SimpleLis
             super(itemView);
 
             button = itemView.findViewById(R.id.simple_list_item_id);
+            constraintLayout = itemView.findViewById(R.id.simple_list_item_id_subtext);
+            t1 = itemView.findViewById(R.id.textView);
+            t2 = itemView.findViewById(R.id.textView2);
 
             this.onItemLongClickListener = onItemLongClickListener;
 
@@ -329,6 +436,9 @@ class SimpleListAdapter extends RecyclerView.Adapter<SimpleListAdapter.SimpleLis
             super(itemView);
 
             button = itemView.findViewById(R.id.simple_list_item_id);
+            constraintLayout = itemView.findViewById(R.id.simple_list_item_id_subtext);
+            t1 = itemView.findViewById(R.id.textView);
+            t2 = itemView.findViewById(R.id.textView2);
 
             this.onItemClickListener = onItemClickListener;
             this.onItemLongClickListener = onItemLongClickListener;
