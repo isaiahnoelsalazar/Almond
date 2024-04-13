@@ -28,6 +28,7 @@ public class SimpleList {
     int clickListener = 0;
     SimpleListOnItemClick onItemClickListener;
     SimpleListOnItemLongClick onItemLongClickListener;
+    boolean hasSubdata = false;
 
     public SimpleList(Context context, RecyclerView recyclerView, List<String> data){
         this.context = context;
@@ -77,6 +78,7 @@ public class SimpleList {
         this.context = context;
         this.data = data;
         this.subdata = subdata;
+        hasSubdata = true;
         this.recyclerView = recyclerView;
         linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -88,6 +90,7 @@ public class SimpleList {
         this.context = context;
         this.data = data;
         this.subdata = subdata;
+        hasSubdata = true;
         this.recyclerView = recyclerView;
         linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -100,6 +103,7 @@ public class SimpleList {
         this.context = context;
         this.data = data;
         this.subdata = subdata;
+        hasSubdata = true;
         this.recyclerView = recyclerView;
         linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -112,6 +116,7 @@ public class SimpleList {
         this.context = context;
         this.data = data;
         this.subdata = subdata;
+        hasSubdata = true;
         this.recyclerView = recyclerView;
         linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -155,16 +160,26 @@ public class SimpleList {
                     int paddingRight = simpleListAdapter.getItemPaddingRight();
                     int paddingBottom = simpleListAdapter.getItemPaddingBottom();
                     boolean singlePadding = simpleListAdapter.getSinglePadding();
-                    simpleListAdapter = new SimpleListAdapter(clickListener, data, onItemClickListener);
-                    recyclerView.setAdapter(simpleListAdapter);
+                    if (!hasSubdata){
+                        simpleListAdapter = new SimpleListAdapter(clickListener, data, onItemClickListener);
+                        recyclerView.setAdapter(simpleListAdapter);
+                    } else {
+                        simpleListAdapter = new SimpleListAdapter(clickListener, data, subdata, onItemClickListener);
+                        recyclerView.setAdapter(simpleListAdapter);
+                    }
                     if (singlePadding){
                         setItemPadding(paddingAll);
                     } else {
                         setItemPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
                     }
                 } catch (Exception ignored){
-                    simpleListAdapter = new SimpleListAdapter(clickListener, data, onItemClickListener);
-                    recyclerView.setAdapter(simpleListAdapter);
+                    if (!hasSubdata){
+                        simpleListAdapter = new SimpleListAdapter(clickListener, data, onItemClickListener);
+                        recyclerView.setAdapter(simpleListAdapter);
+                    } else {
+                        simpleListAdapter = new SimpleListAdapter(clickListener, data, subdata, onItemClickListener);
+                        recyclerView.setAdapter(simpleListAdapter);
+                    }
                 }
                 break;
             case 2:
@@ -175,16 +190,26 @@ public class SimpleList {
                     int paddingRight = simpleListAdapter.getItemPaddingRight();
                     int paddingBottom = simpleListAdapter.getItemPaddingBottom();
                     boolean singlePadding = simpleListAdapter.getSinglePadding();
-                    simpleListAdapter = new SimpleListAdapter(clickListener, data, onItemLongClickListener);
-                    recyclerView.setAdapter(simpleListAdapter);
+                    if (!hasSubdata){
+                        simpleListAdapter = new SimpleListAdapter(clickListener, data, onItemLongClickListener);
+                        recyclerView.setAdapter(simpleListAdapter);
+                    } else {
+                        simpleListAdapter = new SimpleListAdapter(clickListener, data, subdata, onItemLongClickListener);
+                        recyclerView.setAdapter(simpleListAdapter);
+                    }
                     if (singlePadding){
                         setItemPadding(paddingAll);
                     } else {
                         setItemPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
                     }
                 } catch (Exception ignored){
-                    simpleListAdapter = new SimpleListAdapter(clickListener, data, onItemLongClickListener);
-                    recyclerView.setAdapter(simpleListAdapter);
+                    if (!hasSubdata){
+                        simpleListAdapter = new SimpleListAdapter(clickListener, data, onItemLongClickListener);
+                        recyclerView.setAdapter(simpleListAdapter);
+                    } else {
+                        simpleListAdapter = new SimpleListAdapter(clickListener, data, subdata, onItemLongClickListener);
+                        recyclerView.setAdapter(simpleListAdapter);
+                    }
                 }
                 break;
             case 3:
@@ -195,16 +220,26 @@ public class SimpleList {
                     int paddingRight = simpleListAdapter.getItemPaddingRight();
                     int paddingBottom = simpleListAdapter.getItemPaddingBottom();
                     boolean singlePadding = simpleListAdapter.getSinglePadding();
-                    simpleListAdapter = new SimpleListAdapter(clickListener, data, onItemClickListener, onItemLongClickListener);
-                    recyclerView.setAdapter(simpleListAdapter);
+                    if (!hasSubdata){
+                        simpleListAdapter = new SimpleListAdapter(clickListener, data, onItemClickListener, onItemLongClickListener);
+                        recyclerView.setAdapter(simpleListAdapter);
+                    } else {
+                        simpleListAdapter = new SimpleListAdapter(clickListener, data, subdata, onItemClickListener, onItemLongClickListener);
+                        recyclerView.setAdapter(simpleListAdapter);
+                    }
                     if (singlePadding){
                         setItemPadding(paddingAll);
                     } else {
                         setItemPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
                     }
                 } catch (Exception ignored){
-                    simpleListAdapter = new SimpleListAdapter(clickListener, data, onItemClickListener, onItemLongClickListener);
-                    recyclerView.setAdapter(simpleListAdapter);
+                    if (!hasSubdata){
+                        simpleListAdapter = new SimpleListAdapter(clickListener, data, onItemClickListener, onItemLongClickListener);
+                        recyclerView.setAdapter(simpleListAdapter);
+                    } else {
+                        simpleListAdapter = new SimpleListAdapter(clickListener, data, subdata, onItemClickListener, onItemLongClickListener);
+                        recyclerView.setAdapter(simpleListAdapter);
+                    }
                 }
                 break;
             default:
@@ -215,16 +250,26 @@ public class SimpleList {
                     int paddingRight = simpleListAdapter.getItemPaddingRight();
                     int paddingBottom = simpleListAdapter.getItemPaddingBottom();
                     boolean singlePadding = simpleListAdapter.getSinglePadding();
-                    simpleListAdapter = new SimpleListAdapter(clickListener, data);
-                    recyclerView.setAdapter(simpleListAdapter);
+                    if (!hasSubdata){
+                        simpleListAdapter = new SimpleListAdapter(clickListener, data);
+                        recyclerView.setAdapter(simpleListAdapter);
+                    } else {
+                        simpleListAdapter = new SimpleListAdapter(clickListener, data, subdata);
+                        recyclerView.setAdapter(simpleListAdapter);
+                    }
                     if (singlePadding){
                         setItemPadding(paddingAll);
                     } else {
                         setItemPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
                     }
                 } catch (Exception ignored){
-                    simpleListAdapter = new SimpleListAdapter(clickListener, data);
-                    recyclerView.setAdapter(simpleListAdapter);
+                    if (!hasSubdata){
+                        simpleListAdapter = new SimpleListAdapter(clickListener, data);
+                        recyclerView.setAdapter(simpleListAdapter);
+                    } else {
+                        simpleListAdapter = new SimpleListAdapter(clickListener, data, subdata);
+                        recyclerView.setAdapter(simpleListAdapter);
+                    }
                 }
                 break;
         }
