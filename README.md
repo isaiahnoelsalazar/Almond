@@ -1,3 +1,4 @@
+# Note: This dependency is deprecated and is obsolete. It now exists for archival purposes only.
 # How to use Almond
 - Add JitPack in settings.gradle
 ```
